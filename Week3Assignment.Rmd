@@ -1,0 +1,38 @@
+---
+title: "R HW3"
+author: "Christine"
+date: "July 31, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Find copy of mushroom dataset here: https://github.com/christineyuan/MSDABridgeProgram/blob/master/agaricus-lepiota.data
+
+agaricus.lepiota <- agaricus.lepiota[,1:4]
+
+mushroom <- agaricus.lepiota[, c(1:4)]
+mushroom
+
+#Choose first four columns, including Edible/Poisonous column
+names(mushroom)[1:4] <- c("Edible?", "Shape", "Surface", "Color")
+
+mushroomdf <- data.frame(mushroom)
+is.data.frame(mushroomdf)
+
+#confer: http://stackoverflow.com/questions/16540305/replace-string-in-dataframe
+as.data.frame(lapply(mushroomdf[1], function(x) gsub("e", "edible", x)))
+as.data.frame(sapply(mushroomdf[1], function(x) gsub("p", "poisonous", x)))
+as.data.frame(sapply(mushroomdf[2], function(x) gsub("b", "bell", x)))
+as.data.frame(sapply(mushroomdf[2], function(x) gsub("c", "conical", x)))
+as.data.frame(sapply(mushroomdf[2], function(x) gsub("x", "convex", x)))
+as.data.frame(sapply(mushroomdf[2], function(x) gsub("f", "flat", x)))
+as.data.frame(sapply(mushroomdf[2], function(x) gsub("k", "knobbed", x)))
+as.data.frame(sapply(mushroomdf[2], function(x) gsub("s", "sunken", x)))
+
+#didn't finish transformations because dont' know how to "save changes" to gsub function on mushroomdf
+#     2. cap-surface:              fibrous=f,grooves=g,scaly=y,smooth=s
+#     3. cap-color:                brown=n,buff=b,cinnamon=c,gray=g,green=r,
+#                                  pink=p,purple=u,red=e,white=w,yellow=y
